@@ -194,23 +194,63 @@ export default function Home() {
       <footer className="relative z-10 py-8 sm:py-12 mt-auto">
         <div className="border-t border-white/10 backdrop-blur-sm">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 py-6">
-              <div className="text-center sm:text-left">
-                <p className="text-white/60 text-sm sm:text-base">
-                  {websiteData?.content.find(c => c.key === 'footer_text')?.value || '© 2024 All rights reserved.'}
-                </p>
+            <div className="flex flex-col sm:flex-row justify-between items-center space-y-6 sm:space-y-0 py-8">
+              {/* Copyright Logo */}
+              <div className="flex items-center space-x-3">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur-lg opacity-50 animate-pulse"></div>
+                  <div className="relative bg-black/20 backdrop-blur-sm rounded-full p-3">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                    </svg>
+                  </div>
+                </div>
+                <div className="text-center sm:text-left">
+                  <p className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 text-lg font-bold">
+                    © 2024 All Rights Reserved
+                  </p>
+                  <p className="text-white/40 text-xs mt-1">
+                    Powered by Advanced Web Technology
+                  </p>
+                </div>
               </div>
+
+              {/* Social Links */}
               <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                  <div className="relative w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 cursor-pointer transform hover:scale-110">
+                    <div className="w-2 h-2 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full"></div>
+                  </div>
                 </div>
-                <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                  <div className="relative w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 cursor-pointer transform hover:scale-110">
+                    <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full"></div>
+                  </div>
                 </div>
-                <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                  <div className="relative w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 cursor-pointer transform hover:scale-110">
+                    <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full"></div>
+                  </div>
                 </div>
               </div>
+            </div>
+            
+            {/* Decorative Elements */}
+            <div className="flex justify-center space-x-1 mt-4">
+              {[...Array(20)].map((_, i) => (
+                <div
+                  key={i}
+                  className="w-1 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-full animate-pulse"
+                  style={{
+                    opacity: 0.3 + (Math.random() * 0.4),
+                    animationDelay: `${i * 0.1}s`,
+                    animationDuration: `${1 + Math.random() * 2}s`
+                  }}
+                ></div>
+              ))}
             </div>
           </div>
         </div>
