@@ -1,5 +1,7 @@
-const { db } = require('./src/lib/db')
+const { PrismaClient } = require('@prisma/client')
 const bcrypt = require('bcryptjs')
+
+const db = new PrismaClient()
 
 async function seed() {
   try {
@@ -20,7 +22,7 @@ async function seed() {
       { key: 'logo_url', value: '/logo.svg' },
       { key: 'main_text', value: 'Welcome to my personal website!' },
       { key: 'about_text', value: 'This is where I share my thoughts, projects, and connect with amazing people like you.' },
-      { key: 'footer_text', value: '© 2024 My Personal Website. All rights reserved.' }
+      { key: 'footer_text', value: 'Connect With Me Everywhere' }
     ]
 
     for (const content of defaultContent) {

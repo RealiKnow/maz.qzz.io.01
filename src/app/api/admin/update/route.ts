@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-export const runtime = 'edge'
+import { db } from '@/lib/db'
 
 interface UpdateData {
   content: Array<{ id: string; key: string; value: string }>
@@ -11,12 +10,35 @@ export async function POST(request: NextRequest) {
   try {
     const data: UpdateData = await request.json()
 
-    // For Edge Runtime, we'll simulate the update
-    // In a real production environment, you'd use a database service that works with Edge Runtime
-    console.log('Updating website content:', data.content)
-    console.log('Updating social links:', data.socialLinks)
+    // Update website content
+    for (const content of data.content) {
+      await db.websiteContent.upsert({
+        where: { key: content.key },
+        update: { value: content.value },
+        create: { key: content.key, value: content.value }
+      })
+    }
 
-    // Simulate successful update
+    // Update social links
+    for (const link of data.socialLinks) {
+      if (link.platform && link.url) {
+        await db.socialLink.upsert({
+          where: { id: link.id },
+          update: { 
+            platform: link.platform, 
+            url: link.url, 
+            isActive: link.isActive 
+          },
+          create: { 
+            id: link.id,
+            platform: link.platform, 
+            url: link.url, 
+            isActive: link.isActive 
+          }
+        })
+      }
+    }
+
     return NextResponse.json({ message: 'Website data updated successfully' })
 
   } catch (error) {

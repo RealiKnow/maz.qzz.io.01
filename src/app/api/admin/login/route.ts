@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-export const runtime = 'edge'
+import { db } from '@/lib/db'
+import bcrypt from 'bcryptjs'
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,16 +10,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Username and password are required' }, { status: 400 })
     }
 
-    // For Edge Runtime, we'll use hardcoded credentials
-    // In production, you should use environment variables or a proper auth service
-    const ADMIN_USERNAME = 'admin'
-    const ADMIN_PASSWORD = '29012012' // Default credentials
+    const admin = await db.admin.findUnique({
+      where: { username }
+    })
 
-    if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+    if (!admin) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
     }
 
-    const token = Buffer.from(`${username}:${Date.now()}`).toString('base64')
+    const isPasswordValid = await bcrypt.compare(password, admin.password)
+
+    if (!isPasswordValid) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
+    }
+
+    const token = Buffer.from(`${admin.id}:${Date.now()}`).toString('base64')
 
     return NextResponse.json({ 
       message: 'Login successful',
