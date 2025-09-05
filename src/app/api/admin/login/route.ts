@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import bcrypt from 'bcryptjs'
+import { ADMIN_CREDENTIALS } from '@/lib/edge-config'
+
+export const runtime = 'edge'
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,21 +11,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Username and password are required' }, { status: 400 })
     }
 
-    const admin = await db.admin.findUnique({
-      where: { username }
-    })
-
-    if (!admin) {
+    // Check credentials against the configured values
+    if (username !== ADMIN_CREDENTIALS.username || password !== ADMIN_CREDENTIALS.password) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
     }
 
-    const isPasswordValid = await bcrypt.compare(password, admin.password)
-
-    if (!isPasswordValid) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
-    }
-
-    const token = Buffer.from(`${admin.id}:${Date.now()}`).toString('base64')
+    const token = Buffer.from(`${username}:${Date.now()}`).toString('base64')
 
     return NextResponse.json({ 
       message: 'Login successful',

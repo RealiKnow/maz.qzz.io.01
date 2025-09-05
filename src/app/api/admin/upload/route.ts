@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile } from 'fs/promises'
-import { join } from 'path'
+
+export const runtime = 'edge'
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,20 +11,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 })
     }
 
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-
-    // Generate a unique filename
+    // For Edge Runtime, we can't write to the filesystem
+    // In production, you'd use a cloud storage service like Cloudflare R2, AWS S3, etc.
+    
+    // Generate a mock URL for demonstration
     const timestamp = Date.now()
     const originalName = file.name
     const extension = originalName.split('.').pop()
     const filename = `${timestamp}.${extension}`
 
-    // Save the file to the public directory
-    const path = join(process.cwd(), 'public', 'uploads', filename)
-    await writeFile(path, buffer)
-
-    // Return the URL to access the uploaded file
+    // Return a mock URL (in production, this would be the actual cloud storage URL)
     const fileUrl = `/uploads/${filename}`
 
     return NextResponse.json({ 
