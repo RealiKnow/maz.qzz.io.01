@@ -191,66 +191,80 @@ export default function Home() {
       </main>
 
       {/* Enhanced Footer */}
-      <footer className="relative z-10 py-8 sm:py-12 mt-auto">
-        <div className="border-t border-white/10 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center space-y-6 sm:space-y-0 py-8">
-              {/* Copyright Logo */}
-              <div className="flex items-center space-x-3">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur-lg opacity-50 animate-pulse"></div>
-                  <div className="relative bg-black/20 backdrop-blur-sm rounded-full p-3">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div className="text-center sm:text-left">
-                  <p className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 text-lg font-bold">
-                    © 2024 All Rights Reserved
-                  </p>
-                  <p className="text-white/40 text-xs mt-1">
-                    Powered by Advanced Web Technology
-                  </p>
-                </div>
-              </div>
+      <footer className="relative z-10 py-12 sm:py-16 mt-auto overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-1/4 w-32 h-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-24 h-24 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-2xl animate-pulse animation-delay-2000"></div>
+        </div>
 
-              {/* Social Links */}
-              <div className="flex space-x-4">
-                <div className="group relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                  <div className="relative w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 cursor-pointer transform hover:scale-110">
-                    <div className="w-2 h-2 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full"></div>
+        <div className="relative z-10">
+          {/* Main footer content */}
+          <div className="border-t border-white/10 backdrop-blur-sm">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0 py-12">
+                {/* Copyright section with logo */}
+                <div className="flex flex-col items-center lg:items-start space-y-4">
+                  <div className="flex items-center space-x-3">
+                    {/* Copyright logo */}
+                    <div className="relative">
+                      <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center transform rotate-12 hover:rotate-0 transition-transform duration-300 shadow-lg">
+                        <span className="text-white font-bold text-lg">©</span>
+                      </div>
+                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-ping"></div>
+                    </div>
+                    <div className="text-center lg:text-left">
+                      <h3 className="text-white font-semibold text-lg">© 2024</h3>
+                      <p className="text-white/70 text-sm">All Rights Reserved</p>
+                    </div>
                   </div>
                 </div>
-                <div className="group relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                  <div className="relative w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 cursor-pointer transform hover:scale-110">
-                    <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full"></div>
+
+                {/* Gradient text section */}
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="text-center">
+                    <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 text-lg font-bold animate-gradient">
+                      {websiteData?.content.find(c => c.key === 'footer_text')?.value || 'Connect With Me Everywhere'}
+                    </p>
+                    <div className="mt-2 flex justify-center space-x-2">
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full animate-bounce animation-delay-100"></div>
+                      <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-bounce animation-delay-200"></div>
+                    </div>
                   </div>
                 </div>
-                <div className="group relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                  <div className="relative w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 cursor-pointer transform hover:scale-110">
-                    <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full"></div>
+
+                {/* Decorative elements */}
+                <div className="flex space-x-4">
+                  <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110 cursor-pointer group">
+                    <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full group-hover:animate-pulse"></div>
+                  </div>
+                  <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110 cursor-pointer group">
+                    <div className="w-2 h-2 bg-gradient-to-r from-pink-400 to-blue-400 rounded-full group-hover:animate-pulse"></div>
+                  </div>
+                  <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110 cursor-pointer group">
+                    <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full group-hover:animate-pulse"></div>
                   </div>
                 </div>
               </div>
             </div>
-            
-            {/* Decorative Elements */}
-            <div className="flex justify-center space-x-1 mt-4">
-              {[...Array(20)].map((_, i) => (
-                <div
-                  key={i}
-                  className="w-1 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-full animate-pulse"
-                  style={{
-                    opacity: 0.3 + (Math.random() * 0.4),
-                    animationDelay: `${i * 0.1}s`,
-                    animationDuration: `${1 + Math.random() * 2}s`
-                  }}
-                ></div>
-              ))}
+          </div>
+
+          {/* Bottom bar with additional effects */}
+          <div className="border-t border-white/5">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                <div className="text-center sm:text-left">
+                  <p className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 text-sm font-medium">
+                    Made with ❤️ and Next.js
+                  </p>
+                </div>
+                <div className="flex items-center space-x-6 text-xs">
+                  <span className="text-white/40 hover:text-white/60 transition-colors cursor-pointer">Privacy</span>
+                  <span className="text-white/40 hover:text-white/60 transition-colors cursor-pointer">Terms</span>
+                  <span className="text-white/40 hover:text-white/60 transition-colors cursor-pointer">Contact</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -280,6 +294,17 @@ export default function Home() {
             opacity: 1; 
             transform: translateY(0); 
           }
+        }
+        
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
         }
         
         .animate-blob {
