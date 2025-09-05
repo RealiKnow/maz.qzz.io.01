@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     // For Edge Runtime, we'll use hardcoded credentials
     // In production, you should use environment variables or a proper auth service
     const ADMIN_USERNAME = 'admin'
-    const ADMIN_PASSWORD = 'password123' // Change this in production!
+    const ADMIN_PASSWORD = '29012012' // Default credentials
 
     if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
