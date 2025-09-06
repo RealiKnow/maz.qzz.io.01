@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { edgeStorage } from '@/lib/edge-storage'
+import { supabaseStorage } from '@/lib/supabase-storage'
 
 export const runtime = 'edge'
 
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     const fileUrl = `/uploads/${filename}`
 
     // Update the logo URL in the storage
-    edgeStorage.updateContent('logo_url', fileUrl)
+    await supabaseStorage.updateContent('logo_url', fileUrl)
 
     return NextResponse.json({ 
       message: 'File uploaded successfully',

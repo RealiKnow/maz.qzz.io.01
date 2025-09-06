@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { ADMIN_CREDENTIALS } from '@/lib/edge-storage'
+import { supabaseStorage, ADMIN_CREDENTIALS } from '@/lib/supabase-storage'
 
 export const runtime = 'edge'
 
@@ -13,6 +13,14 @@ export async function POST(request: NextRequest) {
 
     // Check credentials against the configured values
     if (username !== ADMIN_CREDENTIALS.username || password !== ADMIN_CREDENTIALS.password) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
+    }
+
+    // For Edge Runtime, we'll use direct credential comparison
+    // In production, you might want to use a more secure method
+    const isAuthenticated = username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password
+
+    if (!isAuthenticated) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
     }
 
