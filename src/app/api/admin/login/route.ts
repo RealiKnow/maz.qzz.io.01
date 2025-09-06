@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { ADMIN_CREDENTIALS } from '@/lib/edge-config'
+import { ADMIN_CREDENTIALS } from '@/lib/edge-storage'
 
 export const runtime = 'edge'
 

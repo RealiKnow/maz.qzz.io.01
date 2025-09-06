@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { edgeStorage } from '@/lib/edge-storage'
 
 export const runtime = 'edge'
 
@@ -11,17 +12,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 })
     }
 
-    // For Edge Runtime, we can't write to the filesystem
-    // In production, you'd use a cloud storage service like Cloudflare R2, AWS S3, etc.
+    // For Edge Runtime, we'll simulate file upload and update the logo URL
+    // In production, this would use Cloudflare R2 or similar cloud storage
     
-    // Generate a mock URL for demonstration
     const timestamp = Date.now()
     const originalName = file.name
     const extension = originalName.split('.').pop()
     const filename = `${timestamp}.${extension}`
 
-    // Return a mock URL (in production, this would be the actual cloud storage URL)
+    // Generate a URL (in production, this would be the actual cloud storage URL)
     const fileUrl = `/uploads/${filename}`
+
+    // Update the logo URL in the storage
+    edgeStorage.updateContent('logo_url', fileUrl)
 
     return NextResponse.json({ 
       message: 'File uploaded successfully',
